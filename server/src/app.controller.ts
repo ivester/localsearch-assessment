@@ -1,15 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Business } from './interfaces/business';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  // TODO add query params to search by name or address
-  // TODO use Business[] interface
-  async getAllBusiness(): Promise<any> {
-    const { data } = await this.appService.findAll();
-    return data;
+  @Get('businesses')
+  getAllBusiness(@Query('search') search): Promise<Business[]> {
+    return this.appService.findAll(search);
   }
 }
