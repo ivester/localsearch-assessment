@@ -1,7 +1,7 @@
 <template>
-  <HelloWorld />
+  <Search />
 </template>
 
 <script lang="ts" setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
+  import Search from '@/components/Search.vue'
 </script>
