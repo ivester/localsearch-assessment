@@ -6,7 +6,10 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  // TODO add query params to search by name or address
+  // TODO use Business[] interface
+  async getAllBusiness(): Promise<any> {
+    const { data } = await this.appService.findAll();
+    return data;
   }
 }
