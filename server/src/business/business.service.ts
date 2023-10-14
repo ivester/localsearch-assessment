@@ -1,6 +1,11 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { Business, BusinessRaw } from './business.interface';
+import {
+  Business,
+  BusinessDetail,
+  BusinessRaw,
+  openingHour,
+} from './business.interface';
 
 @Injectable()
 export class BusinessService {
@@ -11,6 +16,9 @@ export class BusinessService {
   async loadAll(): Promise<BusinessRaw[]> {
     const url = 'https://storage.googleapis.com/coding-session-rest-api/';
     const response = await Promise.all([
+      // From what I can see, there is no search endpoint on the fake API or "get all businesses"
+      // Checking https://storage.googleapis.com/coding-session-rest-api/ shows only two businesses,
+      // therefore I am manually loading these two businesses with two separate get requests
       this.httpService.axiosRef.get(url + 'GXvPAor1ifNfpF0U5PTG0w'),
       this.httpService.axiosRef.get(url + 'ohGSnJtMIC5nPfYRi_HTAg'),
     ]);
@@ -23,7 +31,7 @@ export class BusinessService {
     return response.data;
   }
 
-  processData(business: BusinessRaw): Business {
+  processBusiness(business: BusinessRaw): Business {
     return {
       id: business.local_entry_id,
       name: business.displayed_what,
@@ -31,10 +39,28 @@ export class BusinessService {
     };
   }
 
+  processBusinessDetail(business: BusinessRaw): BusinessDetail {
+    return {
+      ...this.processBusiness(business),
+      openingHours: this.processOpeningHours(business),
+    };
+  }
+
+  processOpeningHours(business: BusinessRaw): openingHour[] {
+    return Object.keys(business.opening_hours.days).map((day, index) => ({
+      id: index,
+      day,
+      hours: business.opening_hours.days[day].map((hour) => ({
+        start: hour.start,
+        end: hour.end,
+      })),
+    }));
+  }
+
   async findAll(search: string): Promise<Business[]> {
     const businessesRaw = await this.loadAll();
     const businesses = businessesRaw.map((business) =>
-      this.processData(business),
+      this.processBusiness(business),
     );
     if (!search) return businesses;
     return businesses.filter(
@@ -47,7 +73,7 @@ export class BusinessService {
   async get(id: string): Promise<Business> {
     // TODO error handling if id did not return any data
     const businessRaw = await this.load(id);
-    const businesses = this.processData(businessRaw);
+    const businesses = this.processBusinessDetail(businessRaw);
     return businesses;
   }
 }
