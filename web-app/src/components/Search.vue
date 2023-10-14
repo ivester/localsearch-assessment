@@ -10,14 +10,15 @@
         @click:append-inner="search"
         @keyup.enter="search"
       />
-      <div v-if="results.length">
+      <div v-if="businesses.length">
         <v-card
-          v-for="result in results"
-          :key="result.local_entry_id"
+          v-for="business in businesses"
+          :key="business.id"
         >
           <v-card-title>
-            <span class="headline">{{ result.displayed_what }}</span>
+            <span class="headline">{{ business.name }}</span>
           </v-card-title>
+          {{ business.where }}
         </v-card>
       </div>
     </v-responsive>
@@ -29,15 +30,17 @@
   import { ref } from 'vue'
 
   interface Result {
-    local_entry_id: string
-    displayed_what: string
+    id: string;
+    name: string;
+    where: string;
   }
 
   const query = ref<String>('')
-  const results = ref<Result[]>([])
+  const businesses = ref<Result[]>([])
   async function search() {
     // TODO maybe make some env where I can set URL - by default localhost:4000
+    // TODO axios response type
     const response = await axios.get<Result[]>(`http://localhost:4000/businesses?search=${query.value}`)
-    results.value = response.data
+    businesses.value = response.data
   }
 </script>

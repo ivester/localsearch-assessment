@@ -1,13 +1,13 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { AppService } from './app.service';
-import { Business } from './interfaces/business';
+import { Business } from './business/business.interface';
+import { BusinessService } from './business/business.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly businessService: BusinessService) {}
 
   @Get('businesses')
   getAllBusiness(@Query('search') search): Promise<Business[]> {
-    return this.appService.findAll(search);
+    return this.businessService.findAll(search);
   }
 }
