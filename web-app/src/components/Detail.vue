@@ -6,10 +6,8 @@
             <span class="headline">{{ business?.name }}</span>
           </v-card-title>
           Address: {{ business?.where }} <br />
-          // TODO website
-          Website: TODO <br />
-          // TODO phone
-          Phone: TODO <br />
+          <span v-if="business?.url">Website: <a :href="business.url" target="_blank">{{ business?.urlFormatted || business.url }}</a> <br /></span>
+          <span v-if="business?.phone">Phone: <a :href="`tel:${business.phone}`">{{ business?.phoneFormatted || business.phone }}</a> <br /></span>
           Opening Hours: <br />
           <br />
 

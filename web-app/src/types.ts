@@ -5,6 +5,10 @@ export interface Business {
   id: string;
   name: string;
   where: string;
+  url?: string;
+  urlFormatted?: string;
+  phone?: string;
+  phoneFormatted?: string;
 }
 
 export interface BusinessDetail extends Business {

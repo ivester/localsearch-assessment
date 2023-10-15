@@ -4,6 +4,7 @@ import {
   Business,
   BusinessDetail,
   BusinessRaw,
+  Contact,
   Day,
   OpeningHoursRaw,
   openingHour,
@@ -43,11 +44,24 @@ export class BusinessService {
   }
 
   processBusiness(business: BusinessRaw): Business {
+    const url = this.getContact(business, 'url');
+    const phone = this.getContact(business, 'phone');
+
     return {
       id: business.local_entry_id,
       name: business.displayed_what,
       where: business.displayed_where,
+      url: url?.url,
+      urlFormatted: url?.formatted_service_code,
+      phone: phone?.phone_number,
+      phoneFormatted: phone?.formatted_service_code,
     };
+  }
+
+  getContact(business: BusinessRaw, contactType: string): Contact | undefined {
+    return business.addresses[0].contacts.find(
+      (contact) => contact.contact_type === contactType,
+    );
   }
 
   processBusinessDetail(business: BusinessRaw): BusinessDetail {
