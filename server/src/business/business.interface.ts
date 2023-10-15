@@ -10,9 +10,18 @@ export interface BusinessDetail extends Business {
 
 export interface openingHour {
   id: number;
-  day: string;
+  day: Day;
   hours: Hour[];
 }
+
+export type Day =
+  | 'monday'
+  | 'tuesday'
+  | 'wednesday'
+  | 'thursday'
+  | 'friday'
+  | 'saturday'
+  | 'sunday';
 
 export interface Hour {
   start: string;
@@ -32,11 +41,13 @@ export interface OpeningHoursRaw {
 }
 
 export interface DaysRaw {
-  monday: DayRaw[];
-  tuesday: DayRaw[];
-  wednesday: DayRaw[];
-  thursday: DayRaw[];
-  friday: DayRaw[];
+  monday?: DayRaw[];
+  tuesday?: DayRaw[];
+  wednesday?: DayRaw[];
+  thursday?: DayRaw[];
+  friday?: DayRaw[];
+  saturday?: DayRaw[];
+  sunday?: DayRaw[];
 }
 
 export interface DayRaw {

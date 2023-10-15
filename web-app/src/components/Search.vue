@@ -28,25 +28,19 @@
 </template>
 
 <script lang="ts" setup>
+  import { Business } from '@/types';
   import axios from 'axios'
   import { computed } from 'vue';
   import { ref } from 'vue'
 
-  // TODO share this type with Detail.vue - something like @/types/Business maybe?
-  interface Business {
-    id: string;
-    name: string;
-    where: string;
-  }
-
-  const query = ref<String>('')
+  const query = ref<string>('')
   const businesses = ref<Business[]>([])
 
-  const queryUrlFragment = computed(() => query.value ? `?search=${query.value}` : '')
+  // --- Computed ---
+  const queryUrlFragment = computed((): string => query.value ? `?search=${query.value}` : '')
 
+  // --- Methods ---
   async function search() {
-    // TODO maybe make some env where I can set URL - by default localhost:4000
-    // TODO --> axios response type
     const {data} = await axios.get<Business[]>(`http://localhost:4000/businesses${queryUrlFragment.value}`)
     businesses.value = data
   }

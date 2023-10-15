@@ -4,9 +4,20 @@ import {
   Business,
   BusinessDetail,
   BusinessRaw,
+  Day,
   OpeningHoursRaw,
   openingHour,
 } from './business.interface';
+
+const weekDays: Day[] = [
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday',
+];
 
 @Injectable()
 export class BusinessService {
@@ -47,14 +58,17 @@ export class BusinessService {
   }
 
   processOpeningHours(openingHours: OpeningHoursRaw): openingHour[] {
-    return Object.keys(openingHours.days).map((day, index) => ({
-      id: index,
-      day,
-      hours: openingHours.days[day].map((hour) => ({
-        start: hour.start,
-        end: hour.end,
-      })),
-    }));
+    return weekDays.map(
+      (day, index): openingHour => ({
+        id: index,
+        day,
+        hours:
+          openingHours.days[day]?.map((hour) => ({
+            start: hour.start,
+            end: hour.end,
+          })) || [],
+      }),
+    );
   }
 
   async findAll(search: string): Promise<Business[]> {
