@@ -4,6 +4,7 @@ import {
   Business,
   BusinessDetail,
   BusinessRaw,
+  OpeningHoursRaw,
   openingHour,
 } from './business.interface';
 
@@ -11,24 +12,23 @@ import {
 export class BusinessService {
   constructor(private readonly httpService: HttpService) {}
 
-  // TODO split into more methods or even services
-  // TODO make data returned to frontend to be useful for FE
   async loadAll(): Promise<BusinessRaw[]> {
-    const url = 'https://storage.googleapis.com/coding-session-rest-api/';
     const response = await Promise.all([
       // From what I can see, there is no search endpoint on the fake API or "get all businesses"
       // Checking https://storage.googleapis.com/coding-session-rest-api/ shows only two businesses,
       // therefore I am manually loading these two businesses with two separate get requests
-      this.httpService.axiosRef.get(url + 'GXvPAor1ifNfpF0U5PTG0w'),
-      this.httpService.axiosRef.get(url + 'ohGSnJtMIC5nPfYRi_HTAg'),
+      this.load('GXvPAor1ifNfpF0U5PTG0w'),
+      this.load('ohGSnJtMIC5nPfYRi_HTAg'),
     ]);
-    return response.map((res) => res.data);
+
+    return response.map((res) => res);
   }
 
   async load(id: string): Promise<BusinessRaw> {
     const url = `https://storage.googleapis.com/coding-session-rest-api/${id}`;
-    const response = await this.httpService.axiosRef.get(url);
-    return response.data;
+    const { data } = await this.httpService.axiosRef.get<BusinessRaw>(url);
+
+    return data;
   }
 
   processBusiness(business: BusinessRaw): Business {
@@ -42,15 +42,15 @@ export class BusinessService {
   processBusinessDetail(business: BusinessRaw): BusinessDetail {
     return {
       ...this.processBusiness(business),
-      openingHours: this.processOpeningHours(business),
+      openingHours: this.processOpeningHours(business.opening_hours),
     };
   }
 
-  processOpeningHours(business: BusinessRaw): openingHour[] {
-    return Object.keys(business.opening_hours.days).map((day, index) => ({
+  processOpeningHours(openingHours: OpeningHoursRaw): openingHour[] {
+    return Object.keys(openingHours.days).map((day, index) => ({
       id: index,
       day,
-      hours: business.opening_hours.days[day].map((hour) => ({
+      hours: openingHours.days[day].map((hour) => ({
         start: hour.start,
         end: hour.end,
       })),
@@ -63,6 +63,7 @@ export class BusinessService {
       this.processBusiness(business),
     );
     if (!search) return businesses;
+
     return businesses.filter(
       (business) =>
         business.name.toLowerCase().indexOf(search) > -1 ||
@@ -74,6 +75,7 @@ export class BusinessService {
     // TODO error handling if id did not return any data
     const businessRaw = await this.load(id);
     const businesses = this.processBusinessDetail(businessRaw);
+
     return businesses;
   }
 }
