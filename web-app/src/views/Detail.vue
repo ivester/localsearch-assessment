@@ -4,11 +4,10 @@
       v-if="business"
       :business="business"
     />
-    <span v-if="errorMessage">
-      <!-- TODO make pretty -->
-      {{ errorMessage }}<br>
-      <router-link to="/">Go to Search</router-link>
-    </span>
+    <Alert
+      v-if="errorMessage"
+      :message="errorMessage"
+    />
   </div>
 </template>
 
@@ -18,6 +17,7 @@
   import { ref, onMounted } from 'vue'
   import { useRoute } from 'vue-router'
   import BusinessCard from '@/components/BusinessCard.vue';
+  import Alert from '@/components/Alert.vue';
 
   const URL = 'http://localhost:4000/business/'
 
@@ -41,13 +41,7 @@
       const { data } = await axios.get<Business>(`${URL}${route.params.id}`)
       business.value = data
     } catch (error) {
-      errorMessage.value = 'Something went wrong. Please try to search for the business you are looking for using its name or address.'
+      errorMessage.value = 'Something went wrong. Please try (again) to search for the business you are looking for using its name or address.'
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .opening-hours {
-    text-transform: capitalize;
-  }
-</style>
