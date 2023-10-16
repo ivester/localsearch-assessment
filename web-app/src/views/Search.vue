@@ -1,6 +1,5 @@
 <template>
-  <div class="search">
-    <!-- TODO make into components -->
+  <div>
     <v-text-field
       v-model="query"
       label="Search Business Entries..."
@@ -9,20 +8,7 @@
       @click:append-inner="search"
       @keyup.enter="search"
     />
-    <v-snackbar
-      v-model="snackbar"
-      location="top"
-      color="red"
-      :timeout="5000"
-    >
-      <div class="search__error">
-        <v-icon
-          class="search__error-icon"
-          icon="mdi-alert"
-        />
-        <span>{{ errorMessage }}</span>
-      </div>
-    </v-snackbar>
+    <SnackBar :message="errorMessage" :show="snackbar"/>
     <div v-if="businesses.length">
       <BusinessCard
         v-for="business in businesses"
@@ -40,6 +26,7 @@
   import { computed } from 'vue';
   import { ref } from 'vue'
   import BusinessCard from '@/components/BusinessCard.vue';
+  import SnackBar from '@/components/SnackBar.vue';
 
   const query = ref<string>('')
   const businesses = ref<Business[]>([])
@@ -63,18 +50,3 @@
     }
   }
 </script>
-
-<style scoped lang="scss">
-  .search {
-    &__error {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-
-      &-icon {
-        margin-right: 16px;
-      }
-    }
-  }
-</style>

@@ -28,7 +28,7 @@
 
   onMounted(async () => {
     // I could pass the data directly from the search page
-    // but then I could not reload this page here
+    // but then I could not reload the detail page
     // therefore I load the data here again
     load()
   })
