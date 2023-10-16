@@ -1,34 +1,36 @@
 <template>
-  <v-container class="fill-height">
-    <v-responsive class="align-center text-center fill-height">
-      <v-card>
-          <v-card-title>
-            <span class="headline">{{ business?.name }}</span>
-          </v-card-title>
-          Address: {{ business?.where }} <br />
-          <span v-if="business?.url">Website: <a :href="business.url" target="_blank">{{ business?.urlFormatted || business.url }}</a> <br /></span>
-          <span v-if="business?.phone">Phone: <a :href="`tel:${business.phone}`">{{ business?.phoneFormatted || business.phone }}</a> <br /></span>
-          Opening Hours: <br />
-          <br />
+  <div>
+    <v-card v-if="business">
+      <v-card-title>
+        <span class="headline">{{ business?.name }}</span>
+      </v-card-title>
+      Address: {{ business?.where }} <br />
+      <span v-if="business?.url">Website: <a :href="business.url" target="_blank">{{ business?.urlFormatted || business.url }}</a> <br /></span>
+      <span v-if="business?.phone">Phone: <a :href="`tel:${business.phone}`">{{ business?.phoneFormatted || business.phone }}</a> <br /></span>
+      Opening Hours: <br />
+      <br />
 
-          <!-- TODO add everywhere classes in the BEM style -->
-          <span
-            v-for="openingHour in openingHoursFormatted"
-            :key="openingHour.id"
-            class="opening-hours"
-          >
-            {{openingHour.days}}:
-            <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
-            <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
-            <!-- eslint-disable-next-line vue/require-v-for-key -->
-            <span v-for="hour in openingHour.hours">
-              {{ hour }}<br>
-            </span>
-            <br>
-          </span>
-        </v-card>
-    </v-responsive>
-  </v-container>
+      <!-- TODO add everywhere classes in the BEM style -->
+      <span
+        v-for="openingHour in openingHoursFormatted"
+        :key="openingHour.id"
+        class="opening-hours"
+      >
+        {{openingHour.days}}:
+        <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
+        <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
+        <!-- eslint-disable-next-line vue/require-v-for-key -->
+        <span v-for="hour in openingHour.hours">
+          {{ hour }}<br>
+        </span>
+        <br>
+      </span>
+    </v-card>
+    <span v-if="errorMessage">
+      {{ errorMessage }}<br>
+      <router-link to="/">Go to Search</router-link>
+    </span>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -45,16 +47,17 @@
   import { ref, onMounted } from 'vue'
   import { useRoute } from 'vue-router'
 
+  const URL = 'http://localhost:4000/business/'
+
   const route = useRoute()
 
-  const business = ref<BusinessDetail | null>(null)
+  const business = ref<BusinessDetail | undefined>(undefined)
+  const errorMessage = ref<string | undefined>(undefined)
 
   onMounted(async () => {
-    // TODO if detail route ID does not return any result then show warning message
     // I could load all the data when searching and then just pass the data to the detail view
     // but then I could not reload a detail page on its own
-    const { data } = await axios.get<BusinessDetail>(`http://localhost:4000/business/${route.params.id}`)
-    business.value = data
+    load()
   })
 
   // --- Computed ---
@@ -73,6 +76,16 @@
     ))
 
   // --- Methods ---
+
+  // load and set business data or set error message
+  const load = async (): Promise<undefined> => {
+    try {
+      const { data } = await axios.get<BusinessDetail>(`${URL}${route.params.id}`)
+      business.value = data
+    } catch (error) {
+      errorMessage.value = 'Something went wrong. Please try to search for the business you are looking for using its name or address.'
+    }
+  }
 
   // group days with same hours together
   const groupOpeningHours = (acc: OpeningHourGrouped[], curr: OpeningHour): OpeningHourGrouped[] => {

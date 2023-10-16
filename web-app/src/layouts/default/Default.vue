@@ -1,9 +1,12 @@
 <template>
   <v-app>
-    <default-view />
+    <v-main>
+      <v-container class="fill-height">
+        <v-responsive class="align-center text-center fill-height">
+          <router-view />
+        </v-responsive>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
-<script lang="ts" setup>
-  import DefaultView from './View.vue'
-</script>
