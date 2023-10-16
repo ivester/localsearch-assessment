@@ -21,7 +21,7 @@ export interface OpeningHour {
   hours: Hour[];
 }
 
-export interface OpeningHourMerged {
+export interface OpeningHourGrouped {
   id: number;
   days: Day[];
   hours: Hour[];

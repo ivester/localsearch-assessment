@@ -35,7 +35,7 @@
   import {
     BusinessDetail,
     OpeningHour,
-    OpeningHourMerged,
+    OpeningHourGrouped,
     OpeningHourFormatted,
     Day,
     Hour
@@ -60,13 +60,12 @@
   // --- Computed ---
 
   // days with same hours grouped together
-  const openingHoursMerged = computed((): OpeningHourMerged[] =>
-    business.value?.openingHours.reduce(mergeOpeningHours, []) || [])
+  const openingHoursGrouped = computed((): OpeningHourGrouped[] =>
+    business.value?.openingHours.reduce(groupOpeningHours, []) || [])
 
   // days and hours with same hours grouped together and formatted for display
   const openingHoursFormatted = computed((): OpeningHourFormatted[] =>
-    // TODO maybe there is a better name for openingHourMerged - I call the param group - maybe openingHourGroupe?
-    openingHoursMerged.value.map((group: OpeningHourMerged): OpeningHourFormatted => ({
+    openingHoursGrouped.value.map((group: OpeningHourGrouped): OpeningHourFormatted => ({
         ...group,
         days: formatDays(group.days),
         hours: formatHours(group.hours)
@@ -76,9 +75,9 @@
   // --- Methods ---
 
   // group days with same hours together
-  const mergeOpeningHours = (acc: OpeningHourMerged[], curr: OpeningHour): OpeningHourMerged[] => {
+  const groupOpeningHours = (acc: OpeningHourGrouped[], curr: OpeningHour): OpeningHourGrouped[] => {
     const previous = acc.at(-1)
-    // only merge days with same hours together if they follow each other
+    // only group days with same hours together if they follow each other
     const hoursSameAsPervious = JSON.stringify(previous?.hours) === JSON.stringify(curr.hours)
 
     if (hoursSameAsPervious) {
