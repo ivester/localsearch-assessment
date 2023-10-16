@@ -95,7 +95,6 @@ export class BusinessService {
   }
 
   async get(id: string): Promise<Business> {
-    // TODO error handling if id did not return any data
     const businessRaw = await this.load(id);
     const businesses = this.processBusiness(businessRaw);
 
