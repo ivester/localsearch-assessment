@@ -50,6 +50,7 @@
   const business = ref<BusinessDetail | null>(null)
 
   onMounted(async () => {
+    // TODO if detail route ID does not return any result then show warning message
     // I could load all the data when searching and then just pass the data to the detail view
     // but then I could not reload a detail page on its own
     const { data } = await axios.get<BusinessDetail>(`http://localhost:4000/business/${route.params.id}`)
