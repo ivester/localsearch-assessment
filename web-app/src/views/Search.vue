@@ -24,17 +24,12 @@
       </div>
     </v-snackbar>
     <div v-if="businesses.length">
-      <!-- TODO make shared component to share with detail view -->
-      <v-card
+      <BusinessCard
         v-for="business in businesses"
         :key="business.id"
-        :to="{ name: 'Detail', params: { id: business.id } }"
-      >
-        <v-card-title>
-          <span class="headline">{{ business.name }}</span>
-        </v-card-title>
-        {{ business.where }}
-      </v-card>
+        :business="business"
+        mode="search"
+      />
     </div>
   </div>
 </template>
@@ -44,6 +39,7 @@
   import axios from 'axios'
   import { computed } from 'vue';
   import { ref } from 'vue'
+  import BusinessCard from '@/components/BusinessCard.vue';
 
   const query = ref<string>('')
   const businesses = ref<Business[]>([])

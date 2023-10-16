@@ -2,14 +2,11 @@ export interface Business {
   id: string;
   name: string;
   where: string;
+  openingHours?: openingHour[];
   url?: string;
   urlFormatted?: string;
   phone?: string;
   phoneFormatted?: string;
-}
-
-export interface BusinessDetail extends Business {
-  openingHours: openingHour[];
 }
 
 export interface openingHour {

@@ -2,7 +2,6 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import {
   Business,
-  BusinessDetail,
   BusinessRaw,
   Contact,
   Day,
@@ -51,6 +50,7 @@ export class BusinessService {
       id: business.local_entry_id,
       name: business.displayed_what,
       where: business.displayed_where,
+      openingHours: this.processOpeningHours(business.opening_hours),
       url: url?.url,
       urlFormatted: url?.formatted_service_code,
       phone: phone?.phone_number,
@@ -64,20 +64,15 @@ export class BusinessService {
     );
   }
 
-  processBusinessDetail(business: BusinessRaw): BusinessDetail {
-    return {
-      ...this.processBusiness(business),
-      openingHours: this.processOpeningHours(business.opening_hours),
-    };
-  }
-
-  processOpeningHours(openingHours: OpeningHoursRaw): openingHour[] {
+  processOpeningHours(
+    openingHours: OpeningHoursRaw | undefined,
+  ): openingHour[] {
     return weekDays.map(
       (day, index): openingHour => ({
         id: index,
         day,
         hours:
-          openingHours.days[day]?.map((hour) => ({
+          openingHours?.days[day]?.map((hour) => ({
             start: hour.start,
             end: hour.end,
           })) || [],
@@ -102,7 +97,7 @@ export class BusinessService {
   async get(id: string): Promise<Business> {
     // TODO error handling if id did not return any data
     const businessRaw = await this.load(id);
-    const businesses = this.processBusinessDetail(businessRaw);
+    const businesses = this.processBusiness(businessRaw);
 
     return businesses;
   }

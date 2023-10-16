@@ -9,10 +9,7 @@ export interface Business {
   urlFormatted?: string;
   phone?: string;
   phoneFormatted?: string;
-}
-
-export interface BusinessDetail extends Business {
-  openingHours: OpeningHour[];
+  openingHours?: OpeningHour[];
 }
 
 export interface OpeningHour {
