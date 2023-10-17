@@ -1,22 +1,26 @@
 <template>
-  <div>
+  <div class="search">
     <v-text-field
       v-model="query"
-      label="Search Business Entries..."
+      label="Search Business"
       variant="solo-filled"
       append-inner-icon="mdi-magnify"
       @click:append-inner="search"
       @keyup.enter="search"
     />
     <SnackBar :message="errorMessage" :show="snackbar"/>
-    <div v-if="businesses.length">
-      <BusinessCard
+    <v-row v-if="businesses.length">
+      <v-col
         v-for="business in businesses"
         :key="business.id"
-        :business="business"
-        mode="search"
-      />
-    </div>
+        cols="6"
+      >
+        <BusinessCard
+          :business="business"
+          mode="search"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -50,3 +54,11 @@
     }
   }
 </script>
+
+<style>
+  .search {
+    /* give the search view a min height so the input doesn't jump around when results are shown */
+    /* works fine for the expected two results - would need a better solution for more results */
+    min-height: 400px;
+  }
+</style>

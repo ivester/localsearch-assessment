@@ -1,14 +1,20 @@
 <template>
-  <v-card :to="link">
+  <v-card
+    :to="link"
+    variant="tonal"
+    :elevation="4"
+  >
     <v-card-title>
       <span class="headline">{{ business.name }}</span>
     </v-card-title>
-    Address: {{ business.where }} <br />
-    <div v-if="mode === 'detail'">
-      <span v-if="business?.url">Website: <a :href="business.url" target="_blank">{{ business?.urlFormatted || business.url }}</a> <br /></span>
-      <span v-if="business?.phone">Phone: <a :href="`tel:${business.phone}`">{{ business?.phoneFormatted || business.phone }}</a> <br /></span>
-      <OpeningHours v-if="business?.openingHours" :opening-hours="business.openingHours"/>
-    </div>
+    <v-card-text>
+      {{ business.where }} <br />
+      <div v-if="mode === 'detail'">
+        <span v-if="business?.url">Website: <a :href="business.url" target="_blank">{{ business?.urlFormatted || business.url }}</a> <br /></span>
+        <span v-if="business?.phone">Phone: <a :href="`tel:${business.phone}`">{{ business?.phoneFormatted || business.phone }}</a> <br /></span>
+        <OpeningHours v-if="business?.openingHours" :opening-hours="business.openingHours"/>
+      </div>
+    </v-card-text>
   </v-card>
 </template>
 

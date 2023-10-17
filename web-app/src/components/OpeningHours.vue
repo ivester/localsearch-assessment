@@ -6,15 +6,15 @@
     <span
       v-for="openingHour in openingHoursFormatted"
       :key="openingHour.id"
+      class="opening-hours__values"
     >
-      <span class="opening-hours__days">{{openingHour.days}}:</span>
+      <span>{{openingHour.days}}: </span>
       <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
       <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
       <!-- eslint-disable-next-line vue/require-v-for-key -->
       <span v-for="hour in openingHour.hours">
         {{ hour }}<br>
       </span>
-      <br>
     </span>
   </div>
 </template>
@@ -93,7 +93,7 @@
 
 <style lang="scss" scoped>
   .opening-hours {
-    &__days {
+    &__values {
       text-transform: capitalize;
     }
   }
