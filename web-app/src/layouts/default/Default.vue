@@ -2,7 +2,7 @@
   <v-app class="default-layout">
     <v-main>
       <v-container class="default-layout__container fill-height">
-        <v-responsive class="align-center text-center fill-height">
+        <v-responsive class="align-center fill-height">
           <router-view class="default-layout__view"/>
         </v-responsive>
       </v-container>
@@ -14,7 +14,7 @@
   .default-layout {
     // to UI looks better if it doesn't grow over the whole width of big screens
     &__container {
-      max-width: 680px;
+      max-width: 900px;
     }
 
     &__view {

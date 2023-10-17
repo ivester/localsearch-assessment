@@ -5,19 +5,23 @@
       label="Search Business"
       variant="solo-filled"
       append-inner-icon="mdi-magnify"
+      :autofocus="true"
       @click:append-inner="search"
       @keyup.enter="search"
     />
     <SnackBar :message="errorMessage" :show="snackbar"/>
     <v-row v-if="businesses.length">
+      <!-- On bigger screens, show two columns of cards -->
+      <!-- If there is only one result than show only one column, even on a big screen -->
       <v-col
         v-for="business in businesses"
         :key="business.id"
-        cols="6"
+        cols="12"
+        :md="businesses.length > 1 ? 6 : 12"
       >
         <BusinessCard
           :business="business"
-          mode="search"
+          variant="search"
         />
       </v-col>
     </v-row>

@@ -1,43 +1,48 @@
 <template>
   <v-card
     :to="link"
-    variant="tonal"
     :elevation="4"
+    variant="tonal"
   >
-    <v-card-title>
-      <span class="headline">{{ business.name }}</span>
-    </v-card-title>
-    <v-card-text>
-      {{ business.where }} <br />
-      <div v-if="mode === 'detail'">
-        <span v-if="business?.url">Website: <a :href="business.url" target="_blank">{{ business?.urlFormatted || business.url }}</a> <br /></span>
-        <span v-if="business?.phone">Phone: <a :href="`tel:${business.phone}`">{{ business?.phoneFormatted || business.phone }}</a> <br /></span>
-        <OpeningHours v-if="business?.openingHours" :opening-hours="business.openingHours"/>
-      </div>
-    </v-card-text>
+    <v-card-title>{{ business.name }}</v-card-title>
+    
+    <v-divider></v-divider>
+    
+    <v-list v-if="variant === 'search'">
+      <v-list-item
+        :title="business.where"
+        prepend-icon="mdi-map-marker"
+        subtitle="Address"
+      />
+    </v-list>
+    
+    <BusinessCardDetail
+      v-if="variant === 'detail'"
+      :business="business"
+    />
   </v-card>
 </template>
 
 <script lang="ts" setup>
   import { Business } from '@/types';
-  import OpeningHours from './OpeningHours.vue';
-import { computed } from 'vue';
-import { RouteLocationRaw } from 'vue-router';
+  import { computed } from 'vue';
+  import { RouteLocationRaw } from 'vue-router';
+  import BusinessCardDetail from './BusinessCardDetail.vue';
 
   // --- Props ---
 
   interface Props {
     business: Business;
-    mode?: 'search' | 'detail';
+    variant?: 'search' | 'detail';
   }
 
   const props = withDefaults(defineProps<Props>(), {
-    mode: 'detail'
+    variant: 'detail'
   })
 
   // --- Computed ---
 
   const link = computed((): RouteLocationRaw | undefined => {
-    return props.mode === 'search' ? { name: 'Detail', params: { id: props.business.id } } : undefined
+    return props.variant === 'search' ? { name: 'Detail', params: { id: props.business.id } } : undefined
   })
 </script>

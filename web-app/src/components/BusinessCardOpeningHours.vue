@@ -1,22 +1,31 @@
 <template>
-  <div class="opening-hours">
-    Opening Hours: <br />
-    <br />
-
-    <span
+  <v-list class="opening-hours">
+    <v-list-item
+      title="Opening Hours"
+      prepend-icon="mdi-clock"
+    />
+    <!-- prepending a none existant icon to get the right spacing - feels a bit hacky -->
+    <v-list-item
       v-for="openingHour in openingHoursFormatted"
       :key="openingHour.id"
       class="opening-hours__values"
+      prepend-icon="none-existant"
     >
-      <span>{{openingHour.days}}: </span>
-      <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
-      <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
-      <!-- eslint-disable-next-line vue/require-v-for-key -->
-      <span v-for="hour in openingHour.hours">
-        {{ hour }}<br>
-      </span>
-    </span>
-  </div>
+      <v-row>
+        <v-col cols="6">
+          {{openingHour.days}}: 
+        </v-col>
+        <v-col cols="6">
+            <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
+            <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
+            <!-- eslint-disable-next-line vue/require-v-for-key -->
+            <span v-for="hour in openingHour.hours">
+              {{ hour }}<br>
+            </span>
+        </v-col>
+      </v-row>
+    </v-list-item>
+  </v-list>
 </template>
 
 <script lang="ts" setup>
