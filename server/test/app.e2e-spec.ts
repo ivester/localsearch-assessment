@@ -3,6 +3,9 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
+// TODO this file
+// TODO bring back all the files I deleted with spec
+
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 

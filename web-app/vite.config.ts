@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 // Plugins
 import vue from '@vitejs/plugin-vue'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
@@ -29,6 +30,16 @@ export default defineConfig({
       },
     }),
   ],
+  test: {
+    globals: true,
+    // environment: 'happy-dom',
+    environment: 'jsdom',
+    server: {
+      deps: {
+        inline: ['vuetify'],
+      },
+    }
+  },
   define: { 'process.env': {} },
   resolve: {
     alias: {
