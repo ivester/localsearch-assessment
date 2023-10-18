@@ -1,7 +1,7 @@
 <template>
   <v-card
     :to="link"
-    :elevation="4"
+    :elevation="2"
     variant="tonal"
   >
     <v-card-title>{{ business.name }}</v-card-title>

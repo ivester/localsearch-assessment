@@ -21,7 +21,7 @@ import { ref, watch } from 'vue';
 
   interface Props {
     message: string;
-    show: boolean;
+    show?: boolean;
   }
 
   const props = withDefaults(defineProps<Props>(), {

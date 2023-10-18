@@ -1,6 +1,5 @@
 <template>
   <v-row>
-
     <v-col
       cols="12"
       md="6"
@@ -13,16 +12,16 @@
         />
         <v-list-item
           v-if="business?.url"
+          :title="business?.urlFormatted || business.url"
           :href="business.url"
           target="_blank"
-          :title="business?.urlFormatted || business.url"
           prepend-icon="mdi-web"
           subtitle="Website"
         />
         <v-list-item
           v-if="business?.phone"
-          :href="`tel:${business.phone}`"
           :title="business?.phoneFormatted || business.phone"
+          :href="`tel:${business.phone}`"
           prepend-icon="mdi-phone"
           subtitle="Phone"
         />

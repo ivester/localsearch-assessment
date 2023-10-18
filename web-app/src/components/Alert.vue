@@ -3,6 +3,7 @@
     :text="message"
     type="error"
   >
+    <!-- div wrapper to show the button under the text and not inline with the text -->
     <div>
       <v-btn class="alert-button" to="/">Go to Search</v-btn>
     </div>

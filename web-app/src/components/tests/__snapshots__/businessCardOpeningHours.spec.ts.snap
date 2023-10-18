@@ -1,0 +1,185 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BusinessCardOpeningHours > 
+    shows the following opening hours:
+    * Monday - Friday: 11:30 - 14:00, 18:30 - 22:00
+    * Saturday - Sunday: Closed
+   1`] = `
+"<div data-v-d152d7dc=\\"\\" class=\\"v-list v-theme--light v-list--density-default v-list--one-line opening-hours\\" tabindex=\\"0\\" role=\\"listbox\\">
+  <div data-v-d152d7dc=\\"\\" class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <div class=\\"v-list-item__prepend\\">
+      <!----><i class=\\"mdi-clock mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+      <div class=\\"v-list-item__spacer\\"></div>
+    </div>
+    <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+      <div class=\\"v-list-item-title\\">Opening Hours</div>
+      <!---->
+      <!---->
+    </div>
+    <!---->
+  </div><!-- prepending a none existant icon to get the right spacing - feels a bit hacky -->
+  <div data-v-d152d7dc=\\"\\" class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text opening-hours__values\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <div class=\\"v-list-item__prepend\\">
+      <!----><i class=\\"none-existant mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+      <div class=\\"v-list-item__spacer\\"></div>
+    </div>
+    <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+      <!---->
+      <!---->
+      <div data-v-d152d7dc=\\"\\" class=\\"v-row\\">
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">monday - friday: </div>
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">
+          <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
+          <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
+          <!-- eslint-disable-next-line vue/require-v-for-key --><span data-v-d152d7dc=\\"\\">11:30 - 14:00<br data-v-d152d7dc=\\"\\"></span><span data-v-d152d7dc=\\"\\">18:30 - 22:00<br data-v-d152d7dc=\\"\\"></span>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <div data-v-d152d7dc=\\"\\" class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text opening-hours__values\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <div class=\\"v-list-item__prepend\\">
+      <!----><i class=\\"none-existant mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+      <div class=\\"v-list-item__spacer\\"></div>
+    </div>
+    <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+      <!---->
+      <!---->
+      <div data-v-d152d7dc=\\"\\" class=\\"v-row\\">
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">saturday - sunday: </div>
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">
+          <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
+          <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
+          <!-- eslint-disable-next-line vue/require-v-for-key --><span data-v-d152d7dc=\\"\\">closed<br data-v-d152d7dc=\\"\\"></span>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`BusinessCardOpeningHours > 
+    shows the following opening hours:
+    * Monday: Closed
+    * Tuesday - Friday: 11:30 - 15:00, 18:30 - 00:00
+    * Saturday: 18:00 - 00:00
+    * Sunday: 11:30 - 15:00
+   1`] = `
+"<div data-v-d152d7dc=\\"\\" class=\\"v-list v-theme--light v-list--density-default v-list--one-line opening-hours\\" tabindex=\\"0\\" role=\\"listbox\\">
+  <div data-v-d152d7dc=\\"\\" class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <div class=\\"v-list-item__prepend\\">
+      <!----><i class=\\"mdi-clock mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+      <div class=\\"v-list-item__spacer\\"></div>
+    </div>
+    <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+      <div class=\\"v-list-item-title\\">Opening Hours</div>
+      <!---->
+      <!---->
+    </div>
+    <!---->
+  </div><!-- prepending a none existant icon to get the right spacing - feels a bit hacky -->
+  <div data-v-d152d7dc=\\"\\" class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text opening-hours__values\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <div class=\\"v-list-item__prepend\\">
+      <!----><i class=\\"none-existant mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+      <div class=\\"v-list-item__spacer\\"></div>
+    </div>
+    <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+      <!---->
+      <!---->
+      <div data-v-d152d7dc=\\"\\" class=\\"v-row\\">
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">monday: </div>
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">
+          <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
+          <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
+          <!-- eslint-disable-next-line vue/require-v-for-key --><span data-v-d152d7dc=\\"\\">closed<br data-v-d152d7dc=\\"\\"></span>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <div data-v-d152d7dc=\\"\\" class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text opening-hours__values\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <div class=\\"v-list-item__prepend\\">
+      <!----><i class=\\"none-existant mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+      <div class=\\"v-list-item__spacer\\"></div>
+    </div>
+    <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+      <!---->
+      <!---->
+      <div data-v-d152d7dc=\\"\\" class=\\"v-row\\">
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">tuesday - friday: </div>
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">
+          <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
+          <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
+          <!-- eslint-disable-next-line vue/require-v-for-key --><span data-v-d152d7dc=\\"\\">11:30 - 15:00<br data-v-d152d7dc=\\"\\"></span><span data-v-d152d7dc=\\"\\">18:30 - 00:00<br data-v-d152d7dc=\\"\\"></span>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <div data-v-d152d7dc=\\"\\" class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text opening-hours__values\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <div class=\\"v-list-item__prepend\\">
+      <!----><i class=\\"none-existant mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+      <div class=\\"v-list-item__spacer\\"></div>
+    </div>
+    <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+      <!---->
+      <!---->
+      <div data-v-d152d7dc=\\"\\" class=\\"v-row\\">
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">saturday: </div>
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">
+          <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
+          <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
+          <!-- eslint-disable-next-line vue/require-v-for-key --><span data-v-d152d7dc=\\"\\">18:00 - 00:00<br data-v-d152d7dc=\\"\\"></span>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <div data-v-d152d7dc=\\"\\" class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text opening-hours__values\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <div class=\\"v-list-item__prepend\\">
+      <!----><i class=\\"none-existant mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+      <div class=\\"v-list-item__spacer\\"></div>
+    </div>
+    <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+      <!---->
+      <!---->
+      <div data-v-d152d7dc=\\"\\" class=\\"v-row\\">
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">sunday: </div>
+        <div data-v-d152d7dc=\\"\\" class=\\"v-col v-col-6\\">
+          <!-- Ignoring the key lint error here as I am not worried about performance here. Otherwise I would have to add a unique id to each list element -->
+          <!-- https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key -->
+          <!-- eslint-disable-next-line vue/require-v-for-key --><span data-v-d152d7dc=\\"\\">11:30 - 15:00<br data-v-d152d7dc=\\"\\"></span>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`BusinessCardOpeningHours > shows no opening hours 1`] = `
+"<div data-v-d152d7dc=\\"\\" class=\\"v-list v-theme--light v-list--density-default v-list--one-line opening-hours\\" tabindex=\\"0\\" role=\\"listbox\\">
+  <div data-v-d152d7dc=\\"\\" class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text\\">
+    <!----><span class=\\"v-list-item__underlay\\"></span>
+    <div class=\\"v-list-item__prepend\\">
+      <!----><i class=\\"mdi-clock mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+      <div class=\\"v-list-item__spacer\\"></div>
+    </div>
+    <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+      <div class=\\"v-list-item-title\\">Opening Hours</div>
+      <!---->
+      <!---->
+    </div>
+    <!---->
+  </div><!-- prepending a none existant icon to get the right spacing - feels a bit hacky -->
+</div>"
+`;

@@ -1,0 +1,91 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BusinessCard > shows detail variant 1`] = `
+"<div class=\\"v-card v-theme--light v-card--density-default elevation-2 v-card--variant-tonal\\">
+  <!---->
+  <div class=\\"v-card__loader\\">
+    <div class=\\"v-progress-linear v-theme--light v-locale--is-ltr\\" style=\\"top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);\\" role=\\"progressbar\\" aria-hidden=\\"true\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\">
+      <!---->
+      <div class=\\"v-progress-linear__background\\" style=\\"width: 100%;\\"></div>
+      <transition-stub name=\\"fade-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+        <div class=\\"v-progress-linear__indeterminate\\">
+          <div class=\\"v-progress-linear__indeterminate long\\"></div>
+          <div class=\\"v-progress-linear__indeterminate short\\"></div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <!---->
+  <div class=\\"v-card-title\\">business name</div>
+  <hr class=\\"v-divider v-theme--light\\" aria-orientation=\\"horizontal\\" role=\\"separator\\">
+  <!--v-if-->
+  <div class=\\"v-row\\">
+    <div class=\\"v-col-md-6 v-col-12\\">
+      <div class=\\"v-list v-theme--light v-list--density-default v-list--one-line\\" tabindex=\\"0\\" role=\\"listbox\\">
+        <div class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text\\">
+          <!----><span class=\\"v-list-item__underlay\\"></span>
+          <div class=\\"v-list-item__prepend\\">
+            <!----><i class=\\"mdi-map-marker mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+            <div class=\\"v-list-item__spacer\\"></div>
+          </div>
+          <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+            <div class=\\"v-list-item-title\\">address</div>
+            <div class=\\"v-list-item-subtitle\\">Address</div>
+            <!---->
+          </div>
+          <!---->
+        </div>
+        <!--v-if-->
+        <!--v-if-->
+      </div>
+    </div>
+    <div class=\\"v-col-md-6 v-col-12\\">
+      <!--v-if-->
+    </div>
+  </div>
+  <!---->
+  <!----><span class=\\"v-card__underlay\\"></span>
+</div>"
+`;
+
+exports[`BusinessCard > shows search variant 1`] = `
+"<a class=\\"v-card v-card--link v-theme--light v-card--density-default elevation-2 v-card--variant-tonal\\" href=\\"/detail/id\\">
+  <!---->
+  <div class=\\"v-card__loader\\">
+    <div class=\\"v-progress-linear v-theme--light v-locale--is-ltr\\" style=\\"top: 0px; height: 0px; --v-progress-linear-height: 2px; left: 50%; transform: translateX(-50%);\\" role=\\"progressbar\\" aria-hidden=\\"true\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\">
+      <!---->
+      <div class=\\"v-progress-linear__background\\" style=\\"width: 100%;\\"></div>
+      <transition-stub name=\\"fade-transition\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+        <div class=\\"v-progress-linear__indeterminate\\">
+          <div class=\\"v-progress-linear__indeterminate long\\"></div>
+          <div class=\\"v-progress-linear__indeterminate short\\"></div>
+        </div>
+      </transition-stub>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <!---->
+  <div class=\\"v-card-title\\">business name</div>
+  <hr class=\\"v-divider v-theme--light\\" aria-orientation=\\"horizontal\\" role=\\"separator\\">
+  <div class=\\"v-list v-theme--light v-list--density-default v-list--one-line\\" tabindex=\\"0\\" role=\\"listbox\\">
+    <div class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text\\">
+      <!----><span class=\\"v-list-item__underlay\\"></span>
+      <div class=\\"v-list-item__prepend\\">
+        <!----><i class=\\"mdi-map-marker mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+        <div class=\\"v-list-item__spacer\\"></div>
+      </div>
+      <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+        <div class=\\"v-list-item-title\\">address</div>
+        <div class=\\"v-list-item-subtitle\\">Address</div>
+        <!---->
+      </div>
+      <!---->
+    </div>
+  </div>
+  <!--v-if-->
+  <!----><span class=\\"v-card__overlay\\"></span><span class=\\"v-card__underlay\\"></span>
+</a>"
+`;

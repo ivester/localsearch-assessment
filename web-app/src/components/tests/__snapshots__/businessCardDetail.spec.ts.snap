@@ -1,0 +1,89 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BusinessCardDetail > shows with maximum information (without opening hours) 1`] = `
+"<div class=\\"v-row\\">
+  <div class=\\"v-col-md-6 v-col-12\\">
+    <div class=\\"v-list v-theme--light v-list--density-default v-list--one-line\\" tabindex=\\"0\\" role=\\"listbox\\">
+      <div class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text\\">
+        <!----><span class=\\"v-list-item__underlay\\"></span>
+        <div class=\\"v-list-item__prepend\\">
+          <!----><i class=\\"mdi-map-marker mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+          <div class=\\"v-list-item__spacer\\"></div>
+        </div>
+        <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+          <div class=\\"v-list-item-title\\">address</div>
+          <div class=\\"v-list-item-subtitle\\">Address</div>
+          <!---->
+        </div>
+        <!---->
+      </div><a class=\\"v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text\\" href=\\"url\\" tabindex=\\"-2\\" target=\\"_blank\\"><span class=\\"v-list-item__overlay\\"></span><span class=\\"v-list-item__underlay\\"></span>
+        <div class=\\"v-list-item__prepend\\">
+          <!----><i class=\\"mdi-web mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+          <div class=\\"v-list-item__spacer\\"></div>
+        </div>
+        <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+          <div class=\\"v-list-item-title\\">url formatted</div>
+          <div class=\\"v-list-item-subtitle\\">Website</div>
+          <!---->
+        </div>
+        <!---->
+      </a><a class=\\"v-list-item v-list-item--link v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text\\" href=\\"tel:phone\\" tabindex=\\"-2\\"><span class=\\"v-list-item__overlay\\"></span><span class=\\"v-list-item__underlay\\"></span>
+        <div class=\\"v-list-item__prepend\\">
+          <!----><i class=\\"mdi-phone mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+          <div class=\\"v-list-item__spacer\\"></div>
+        </div>
+        <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+          <div class=\\"v-list-item-title\\">phone formatted</div>
+          <div class=\\"v-list-item-subtitle\\">Phone</div>
+          <!---->
+        </div>
+        <!---->
+      </a>
+    </div>
+  </div>
+  <div class=\\"v-col-md-6 v-col-12\\">
+    <div data-v-d152d7dc=\\"\\" class=\\"v-list v-theme--light v-list--density-default v-list--one-line opening-hours\\" tabindex=\\"0\\" role=\\"listbox\\">
+      <div data-v-d152d7dc=\\"\\" class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text\\">
+        <!----><span class=\\"v-list-item__underlay\\"></span>
+        <div class=\\"v-list-item__prepend\\">
+          <!----><i class=\\"mdi-clock mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+          <div class=\\"v-list-item__spacer\\"></div>
+        </div>
+        <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+          <div class=\\"v-list-item-title\\">Opening Hours</div>
+          <!---->
+          <!---->
+        </div>
+        <!---->
+      </div><!-- prepending a none existant icon to get the right spacing - feels a bit hacky -->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`BusinessCardDetail > shows with minimal information 1`] = `
+"<div class=\\"v-row\\">
+  <div class=\\"v-col-md-6 v-col-12\\">
+    <div class=\\"v-list v-theme--light v-list--density-default v-list--one-line\\" tabindex=\\"0\\" role=\\"listbox\\">
+      <div class=\\"v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text\\">
+        <!----><span class=\\"v-list-item__underlay\\"></span>
+        <div class=\\"v-list-item__prepend\\">
+          <!----><i class=\\"mdi-map-marker mdi v-icon notranslate v-theme--light v-icon--size-default\\" aria-hidden=\\"true\\" density=\\"default\\"></i>
+          <div class=\\"v-list-item__spacer\\"></div>
+        </div>
+        <div class=\\"v-list-item__content\\" data-no-activator=\\"\\">
+          <div class=\\"v-list-item-title\\">address</div>
+          <div class=\\"v-list-item-subtitle\\">Address</div>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class=\\"v-col-md-6 v-col-12\\">
+    <!--v-if-->
+  </div>
+</div>"
+`;
