@@ -80,7 +80,7 @@ export class BusinessService {
     );
   }
 
-  async findAll(search: string): Promise<Business[]> {
+  async findAll(search?: string): Promise<Business[]> {
     const businessesRaw = await this.loadAll();
     const businesses = businessesRaw.map((business) =>
       this.processBusiness(business),
