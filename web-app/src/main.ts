@@ -1,8 +1,4 @@
-/**
- * main.ts
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
+export const SERVER_URL = 'http://localhost:4000/'
 
 // Components
 import App from './App.vue'

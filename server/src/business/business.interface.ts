@@ -34,8 +34,8 @@ export interface BusinessRaw {
   local_entry_id: string;
   displayed_what: string;
   displayed_where: string;
-  opening_hours: OpeningHoursRaw;
-  addresses: Address[];
+  opening_hours?: OpeningHoursRaw;
+  addresses?: AddressRaw[];
 }
 
 export interface OpeningHoursRaw {
@@ -57,13 +57,15 @@ export interface DayRaw {
   end: string;
 }
 
-export interface Address {
-  contacts: Contact[];
+export interface AddressRaw {
+  contacts: ContactRaw[];
 }
 
-export interface Contact {
-  contact_type: string;
+export interface ContactRaw {
+  contact_type: ContactType;
   formatted_service_code: string;
   url?: string;
   phone_number?: string;
 }
+
+export type ContactType = 'url' | 'phone';

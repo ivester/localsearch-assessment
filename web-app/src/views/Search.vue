@@ -35,6 +35,7 @@
   import { ref } from 'vue'
   import BusinessCard from '@/components/BusinessCard.vue';
   import SnackBar from '@/components/SnackBar.vue';
+  import { SERVER_URL } from '@/main';
 
   const query = ref<string>('')
   const businesses = ref<Business[]>([])
@@ -50,7 +51,7 @@
   async function search() {
     try {
       snackbar.value = false
-      const {data} = await axios.get<Business[]>(`http://localhost:4000/businesses${queryUrlFragment.value}`)
+      const {data} = await axios.get<Business[]>(`${SERVER_URL}businesses/${queryUrlFragment.value}`)
       businesses.value = data
     } catch (error) {
       errorMessage.value = 'Something went wrong with the search request. Please try your search request in a few seconds again.'
