@@ -1,10 +1,11 @@
 <template>
   <v-card
+    data-cy="business-card"
+    variant="tonal"
     :to="link"
     :elevation="2"
-    variant="tonal"
   >
-    <v-card-title>{{ business.name }}</v-card-title>
+    <v-card-title data-cy="business-card-title">{{ business.name }}</v-card-title>
     
     <v-divider></v-divider>
     

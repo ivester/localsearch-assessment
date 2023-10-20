@@ -1,6 +1,7 @@
 <template>
   <div class="search">
     <v-text-field
+      data-cy="search-input"
       v-model="query"
       label="Search Business"
       variant="solo-filled"

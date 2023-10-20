@@ -7,7 +7,8 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint": "eslint . --fix --ignore-path .gitignore",
-    "test": "vitest"
+    "test": "vitest",
+    "test:e2e": "cypress open"
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
@@ -24,6 +25,7 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
     "@vue/test-utils": "^2.4.1",
+    "cypress": "^13.3.2",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
     "jsdom": "^22.1.0",
