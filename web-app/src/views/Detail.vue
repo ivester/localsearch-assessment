@@ -39,7 +39,11 @@
     try {
       const { data } = await axios.get<Business>(`${SERVER_URL}business/${route.params.id}`)
       business.value = data
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.response?.status === 404) {
+        errorMessage.value = `The business with the id "${route.params.id}" does not exist exist. Please try to search for the business you are looking for using its name or address.`
+        return
+      }
       errorMessage.value = 'Something went wrong. Please try (again) to search for the business you are looking for using its name or address.'
     }
   }

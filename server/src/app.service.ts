@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { BusinessService } from './business/business.service';
 import { Business } from './business/business.interface';
 
@@ -7,7 +7,7 @@ export class AppService {
   constructor(private readonly businessService: BusinessService) {}
 
   // get business by id
-  get(id: string): Promise<Business> {
+  get(id: string): Promise<Business | NotFoundException> {
     return this.businessService.get(id);
   }
 

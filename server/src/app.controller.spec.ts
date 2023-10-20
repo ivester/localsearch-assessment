@@ -4,7 +4,6 @@ import { BusinessModule } from './business/business.module';
 import { AppService } from './app.service';
 import { BusinessService } from './business/business.service';
 import { Business } from './business/business.interface';
-import { BadGatewayException } from '@nestjs/common';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -88,12 +87,6 @@ describe('AppController', () => {
 
       expect(appController.getBusiness('1')).rejects.toEqual('error message');
       expect(getSpy).toHaveBeenCalledWith('1');
-    });
-
-    it('should throw an error due to missing id param', () => {
-      expect(appController.getBusiness()).rejects.toThrow(
-        new BadGatewayException('Missing id param'),
-      );
     });
   });
 });

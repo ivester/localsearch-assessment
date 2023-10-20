@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { BusinessService } from './business.service';
-import { HttpModule } from '@nestjs/axios';
+import { FakeApiModule } from '../fake-api/fake-api.module';
 
 @Module({
-  imports: [HttpModule],
+  imports: [FakeApiModule],
   providers: [BusinessService],
   exports: [BusinessService],
 })

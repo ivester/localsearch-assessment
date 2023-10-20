@@ -1,5 +1,8 @@
-import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import {
   Business,
   BusinessRaw,
@@ -9,9 +12,7 @@ import {
   OpeningHoursRaw,
   openingHour,
 } from './business.interface';
-
-export const FAKE_API_URL =
-  'https://storage.googleapis.com/coding-session-rest-api/';
+import { FakeApiService } from '../fake-api/fake-api.service';
 
 const weekDays: Day[] = [
   'monday',
@@ -25,30 +26,7 @@ const weekDays: Day[] = [
 
 @Injectable()
 export class BusinessService {
-  constructor(private readonly httpService: HttpService) {}
-
-  // load all businesses from fake API
-  async loadAll(): Promise<BusinessRaw[]> {
-    const response = await Promise.all([
-      // From what I can see, there is no search endpoint on the fake API or "get all businesses"
-      // Checking https://storage.googleapis.com/coding-session-rest-api/ shows only two businesses,
-      // therefore I am manually loading these two businesses with two separate get requests
-      this.load('GXvPAor1ifNfpF0U5PTG0w'),
-      this.load('ohGSnJtMIC5nPfYRi_HTAg'),
-    ]);
-
-    return response;
-  }
-
-  // load a single business by business id from fake API
-  async load(id: string): Promise<BusinessRaw> {
-    const { data } = await this.httpService.axiosRef<BusinessRaw>({
-      url: `${FAKE_API_URL}${id}`,
-      method: `GET`,
-    });
-
-    return data;
-  }
+  constructor(private readonly fakeApiService: FakeApiService) {}
 
   // process data returned from fake API to be used by the frontend
   processBusiness(business: BusinessRaw): Business {
@@ -102,7 +80,7 @@ export class BusinessService {
   // and transform the data structure to make it easy to use by the frontend.
   // Return all the businesses if no search query is provided.
   async findAll(search?: string): Promise<Business[]> {
-    const businessesRaw = await this.loadAll();
+    const businessesRaw = await this.fakeApiService.loadAll();
     const businesses = businessesRaw.map((business) =>
       this.processBusiness(business),
     );
@@ -117,10 +95,15 @@ export class BusinessService {
 
   // get a single business by id and transform the data structure
   // to make it easy to use by the frontend
-  async get(id: string): Promise<Business> {
-    const businessRaw = await this.load(id);
-    const businesses = this.processBusiness(businessRaw);
-
-    return businesses;
+  async get(id: string): Promise<Business | NotFoundException> {
+    try {
+      const businessRaw = await this.fakeApiService.load(id);
+      const businesses = this.processBusiness(businessRaw);
+      return businesses;
+    } catch (error: any) {
+      if (error?.response?.status === 404)
+        throw new NotFoundException(`business with id ${id} not found`);
+      throw new BadRequestException(error);
+    }
   }
 }

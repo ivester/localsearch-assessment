@@ -1,148 +1,36 @@
-import { DeepMocked, createMock } from '@golevelup/ts-jest';
-import { HttpService } from '@nestjs/axios';
 import { Test, TestingModule } from '@nestjs/testing';
-import { BusinessService, FAKE_API_URL } from './business.service';
+import { BusinessService } from './business.service';
 import {
-  AddressRaw,
-  Business,
   BusinessRaw,
-  ContactRaw,
-  OpeningHoursRaw,
   openingHour,
+  OpeningHoursRaw,
 } from './business.interface';
-
-// --- Input Data Mocks ---
-
-const businessOneRaw: BusinessRaw = {
-  local_entry_id: 'GXvPAor1ifNfpF0U5PTG0w',
-  displayed_what: 'Business name 1',
-  displayed_where: 'Address 1',
-};
-
-const businessTwoRaw: BusinessRaw = {
-  local_entry_id: 'ohGSnJtMIC5nPfYRi_HTAg',
-  displayed_what: 'Business name 2',
-  displayed_where: 'Address 2',
-};
-
-const contactUrlRaw: ContactRaw = {
-  contact_type: 'url',
-  formatted_service_code: 'formatted url 1',
-  url: 'url 1',
-};
-const contactPhoneRaw: ContactRaw = {
-  contact_type: 'phone',
-  formatted_service_code: 'formatted phone number 1',
-  phone_number: 'phone number 1',
-};
-
-const addressesOneRaw: AddressRaw[] = [
-  { contacts: [contactUrlRaw, contactPhoneRaw] },
-];
-
-// --- Output Data Mocks ---
-
-const openingHoursAllClosed: openingHour[] = [
-  { day: 'monday', hours: [], id: 0 },
-  { day: 'tuesday', hours: [], id: 1 },
-  { day: 'wednesday', hours: [], id: 2 },
-  { day: 'thursday', hours: [], id: 3 },
-  { day: 'friday', hours: [], id: 4 },
-  { day: 'saturday', hours: [], id: 5 },
-  { day: 'sunday', hours: [], id: 6 },
-];
-
-const businessOne: Business = {
-  id: businessOneRaw.local_entry_id,
-  name: businessOneRaw.displayed_what,
-  where: businessOneRaw.displayed_where,
-  openingHours: openingHoursAllClosed,
-};
-
-const businessOneAddresses: Partial<Business> = {
-  url: contactUrlRaw.url,
-  urlFormatted: contactUrlRaw.formatted_service_code,
-  phone: contactPhoneRaw.phone_number,
-  phoneFormatted: contactPhoneRaw.formatted_service_code,
-};
-
-// --- Tests ---
+import {
+  addressesOneRaw,
+  businessOne,
+  businessOneAddresses,
+  businessOneRaw,
+  businessTwoRaw,
+  contactPhoneRaw,
+  contactUrlRaw,
+  openingHoursAllClosed,
+} from './../../test/mocks';
+import { FakeApiService } from '../fake-api/fake-api.service';
+import { FakeApiModule } from '../fake-api/fake-api.module';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 describe('BusinessService', () => {
+  let fakeApiService: FakeApiService;
   let businessService: BusinessService;
-  let httpService: DeepMocked<HttpService>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        BusinessService,
-        {
-          provide: HttpService,
-          useValue: createMock<HttpService>(),
-        },
-      ],
+      imports: [FakeApiModule],
+      providers: [BusinessService],
     }).compile();
 
+    fakeApiService = module.get<FakeApiService>(FakeApiService);
     businessService = module.get<BusinessService>(BusinessService);
-    httpService = module.get(HttpService);
-  });
-
-  describe('loadAll', () => {
-    it('should return promise with collection of 2 businesses', () => {
-      const loadSpy = jest
-        .spyOn(businessService, 'load')
-        .mockImplementation((id: string): Promise<BusinessRaw> => {
-          if (id === businessOneRaw.local_entry_id)
-            return Promise.resolve(businessOneRaw);
-          if (id === businessTwoRaw.local_entry_id)
-            return Promise.resolve(businessTwoRaw);
-        });
-
-      expect(businessService.loadAll()).resolves.toEqual([
-        businessOneRaw,
-        businessTwoRaw,
-      ]);
-      expect(loadSpy).toHaveBeenNthCalledWith(1, businessOneRaw.local_entry_id);
-      expect(loadSpy).toHaveBeenNthCalledWith(2, businessTwoRaw.local_entry_id);
-    });
-
-    it('should throw an error', () => {
-      const errorMessage = 'businessService.load error';
-      const loadSpy = jest
-        .spyOn(businessService, 'load')
-        .mockImplementationOnce(
-          (): Promise<BusinessRaw> => Promise.reject(errorMessage),
-        );
-
-      expect(businessService.loadAll()).rejects.toBe(errorMessage);
-      expect(loadSpy).toHaveBeenNthCalledWith(1, businessOneRaw.local_entry_id);
-      expect(loadSpy).toHaveBeenNthCalledWith(2, businessTwoRaw.local_entry_id);
-    });
-  });
-
-  describe('load', () => {
-    it('should return promise with business', () => {
-      httpService.axiosRef.mockResolvedValueOnce({
-        data: businessOneRaw,
-        status: 200,
-      });
-      const getSpy = jest.spyOn(httpService, 'axiosRef');
-
-      const result = businessService.load(businessOneRaw.local_entry_id);
-
-      expect(result).resolves.toEqual(businessOneRaw);
-      expect(getSpy).toHaveBeenCalledWith({
-        url: `${FAKE_API_URL}GXvPAor1ifNfpF0U5PTG0w`,
-        method: 'GET',
-      });
-    });
-
-    it('should throw an error', () => {
-      httpService.axiosRef.mockRejectedValueOnce('fake API error message');
-
-      const result = businessService.load(businessOneRaw.local_entry_id);
-      expect(result).rejects.toBe('fake API error message');
-    });
   });
 
   describe('processBusiness', () => {
@@ -357,7 +245,7 @@ describe('BusinessService', () => {
 
       beforeEach(() => {
         loadAllSpy = jest
-          .spyOn(businessService, 'loadAll')
+          .spyOn(fakeApiService, 'loadAll')
           .mockResolvedValue([businessOneRaw, businessTwoRaw]);
       });
 
@@ -425,7 +313,7 @@ describe('BusinessService', () => {
       it('should throw an error', () => {
         const errorMessage = 'businessService.loadAll error';
         const loadAllSpy = jest
-          .spyOn(businessService, 'loadAll')
+          .spyOn(fakeApiService, 'loadAll')
           .mockImplementationOnce(
             (): Promise<BusinessRaw[]> => Promise.reject(errorMessage),
           );
@@ -439,7 +327,7 @@ describe('BusinessService', () => {
   describe('get', () => {
     it('should return a business', () => {
       const loadSpy = jest
-        .spyOn(businessService, 'load')
+        .spyOn(fakeApiService, 'load')
         .mockImplementation(
           (): Promise<BusinessRaw> => Promise.resolve(businessOneRaw),
         );
@@ -447,16 +335,43 @@ describe('BusinessService', () => {
       expect(businessService.get('id')).resolves.toEqual(businessOne);
       expect(loadSpy).toHaveBeenCalledWith('id');
     });
-    it('should throw an error due to api error', () => {
+
+    it('should throw an error if business id does not exist', () => {
+      class ApiError extends Error {
+        response: { status: number };
+        constructor(message: string, status: number) {
+          super(message);
+          this.response = { status };
+        }
+      }
+
+      const businessId = '1';
+      const errorMessage = `business with id ${businessId} not found`;
+      const error = new ApiError(errorMessage, 404);
+      const loadSpy = jest
+        .spyOn(fakeApiService, 'load')
+        .mockImplementationOnce(
+          (): Promise<BusinessRaw> => Promise.reject(error),
+        );
+
+      expect(businessService.get(businessId)).rejects.toEqual(
+        new NotFoundException(errorMessage),
+      );
+      expect(loadSpy).toHaveBeenCalledWith(businessId);
+    });
+
+    it('should throw an error if something else went wrong', () => {
       const errorMessage = 'error message';
       const loadSpy = jest
-        .spyOn(businessService, 'load')
+        .spyOn(fakeApiService, 'load')
         .mockImplementationOnce(
           (): Promise<BusinessRaw> => Promise.reject(errorMessage),
         );
 
-      expect(businessService.get('id')).rejects.toBe(errorMessage);
-      expect(loadSpy).toHaveBeenCalledWith('id');
+      expect(businessService.get('1')).rejects.toEqual(
+        new BadRequestException(errorMessage),
+      );
+      expect(loadSpy).toHaveBeenCalledWith('1');
     });
   });
 });

@@ -1,7 +1,7 @@
 import {
-  BadRequestException,
   Controller,
   Get,
+  NotFoundException,
   Param,
   Query,
 } from '@nestjs/common';
@@ -20,10 +20,9 @@ export class AppController {
   }
 
   @Get('business/:id')
-  async getBusiness(@Param('id') id?: string): Promise<Business> {
-    if (!id) {
-      throw new BadRequestException('Missing id param');
-    }
+  async getBusiness(
+    @Param('id') id: string,
+  ): Promise<Business | NotFoundException> {
     return this.appService.get(id);
   }
 }
