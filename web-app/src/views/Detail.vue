@@ -1,9 +1,22 @@
 <template>
-  <div>
+  <div class="detail">
+
+    <!-- back to search button -->
+    <v-btn
+      v-if="business"
+      data-cy="detail-back-button"
+      class="detail-button"
+      icon="mdi-magnify"
+      to="/"
+    />
+
+    <!-- business card with all the details -->
     <BusinessCard
       v-if="business"
       :business="business"
     />
+
+    <!-- error message if there is an error -->
     <Alert
       v-if="errorMessage"
       :message="errorMessage"
@@ -48,3 +61,15 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+.detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &-button {
+    margin-bottom: 16px;
+  }
+}
+</style>

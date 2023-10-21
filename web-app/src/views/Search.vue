@@ -1,5 +1,7 @@
 <template>
   <div class="search">
+
+    <!-- search input -->
     <v-text-field
       data-cy="search-input"
       v-model="query"
@@ -10,7 +12,19 @@
       @click:append-inner="search"
       @keyup.enter="search"
     />
+
+    <!-- popup error message if there is an error -->
     <SnackBar :message="errorMessage" :show="snackbar"/>
+
+    <!-- no results message -->
+    <div
+      v-if="!businesses.length && isSearching"
+      data-cy="search-no-results"
+    >
+      No results for current search request
+    </div>
+    
+    <!-- search results list -->
     <v-row v-if="businesses.length">
       <!-- On bigger screens, show two columns of cards -->
       <!-- If there is only one result than show only one column, even on a big screen -->
@@ -39,6 +53,7 @@
   import { SERVER_URL } from '@/main';
 
   const query = ref<string>('')
+  const isSearching = ref<boolean>(false)
   const businesses = ref<Business[]>([])
   const snackbar = ref<boolean>(false)
   const errorMessage = ref<string>('')
@@ -50,6 +65,7 @@
   // --- Methods ---
 
   async function search() {
+    isSearching.value = !!query.value
     try {
       snackbar.value = false
       const {data} = await axios.get<Business[]>(`${SERVER_URL}businesses/${queryUrlFragment.value}`)
